@@ -1,0 +1,28 @@
+{
+    "attributes": [
+      {
+        "trait_type": "Rarity",
+        "value": "Once in a lifetime"
+      },
+      {
+        "trait_type": "Reflectiveness",
+        "value": "Shining pearl"
+      },
+      {
+          "trait_type": "Hair",
+          "value": "None"
+      },
+      {
+          "trait_type": "Glasses",
+          "value": "True"
+      },
+      {
+          "trait_type": "Expression",
+          "value": "Staring at you"
+      }
+    ],
+    "description": "The world's most adorable and sensitive (bald) bud.",
+    "image": "ipfs://QmQ1FUQAbAc5mHh7bNTGKGHoHSeFytjb1L8914ahbTSiq2",
+    "name": "StefaMind"
+  }
+  

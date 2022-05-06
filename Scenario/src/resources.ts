@@ -11,13 +11,6 @@ executeTask(async () => {
     }
 })
 
-// export async function getBalance(address: string): Promise<BigNumber> {
-//     const provider = await getProvider();
-//     const requestManager = new RequestManager(provider);
-
-//     return requestManager.eth_getBalance(address, "latest");
-// }
-
 export let price = 0.000001;
 export const currency = 'ETH';
 
@@ -31,10 +24,14 @@ export type TransactionRequest = {
     receiverAddress: string,
     contractAddress: string,
     balance: BigNumber
+    tokenId: number
 }
 export type TransactionResponse = {
     senderAddress: string,
     receiverAddress: string,
     price: number,
     status: string
+}
+export type NewOwnerText = {
+    newOwner: string
 }

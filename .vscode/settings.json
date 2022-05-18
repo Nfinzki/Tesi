@@ -1,0 +1,3 @@
+{
+    "solidity.packageDefaultDependenciesDirectory": "nft/node_modules"
+}

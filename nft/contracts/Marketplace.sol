@@ -11,13 +11,12 @@ contract Marketplace {
 
         if (nft.getApproved(tokenId) != address(this)) {
             revert NotApproved();
-            return;
         }
 
         address payable seller = payable(nft.ownerOf(tokenId));
 
         seller.transfer(msg.value);
-        nft.safeTransferFrom(address(this), msg.sender, tokenId);
+        nft.safeTransferFrom(seller, msg.sender, tokenId);
     }
 
     function exchangeNFT(address nftContract1, uint256 tokenId1, address nftContract2, uint256 tokenId2) public {
@@ -26,14 +25,13 @@ contract Marketplace {
 
         if (nft1.getApproved(tokenId1) != address(this) || nft2.getApproved(tokenId2) != address(this)) {
             revert NotApproved();
-            return;
         }
 
         address firstExchanger = nft1.ownerOf(tokenId1);
         address secondExchanger = nft2.ownerOf(tokenId2);
 
-        nft1.safeTransferFrom(address(this), secondExchanger, tokenId1);
-        nft2.safeTransferFrom(address(this), firstExchanger, tokenId2);
+        nft1.safeTransferFrom(firstExchanger, secondExchanger, tokenId1);
+        nft2.safeTransferFrom(secondExchanger, firstExchanger, tokenId2);
 
     }
 }

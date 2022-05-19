@@ -1,12 +1,13 @@
 import { getProvider } from "@decentraland/web3-provider";
 import {RequestManager, BigNumber, ContractFactory, fromWei } from "eth-connect"
 import NFT_ABI from "src/contracts/NFT_ABI";
-import { currentUserAddress } from "src/resources"
+import { ChangedForSale, currentUserAddress, sceneMessageBus } from "src/resources"
 import { acquireNFT } from "src/transactions"
 
 export class LabledNFT {
     contract: any;
-    
+    forSaleText: TextShape;
+
     constructor(imagePath: string, position: Vector3, rotation: Quaternion, contractAddress: string, tokenId: number) {
         executeTask(async () => {
             const provider = await getProvider();
@@ -24,12 +25,31 @@ export class LabledNFT {
             nftOwner.addComponent(textPosition)
             engine.addEntity(nftOwner);
 
+            
+
             // const balanceWei = await requestManager.eth_getBalance(ownerAddress, "latest");
             // const balance = fromWei(balanceWei, "ether");
 
             nftImage.addComponent(new OnPointerDown((e) => {
                 log("Dati: " + currentUserAddress + "\n" + ownerAddress)
-                acquireNFT(currentUserAddress, ownerAddress, contractAddress, tokenId, new BigNumber(5), textComponent);
+                
+                if (currentUserAddress.toLocaleLowerCase() === ownerAddress.toLocaleLowerCase()) {
+                    if (!this.forSaleText.visible) {
+                        //Approve Marketplace
+                    } else {
+                        //Approve 0x00000000000
+                    }
+
+                    this.forSaleText.visible = !this.forSaleText.visible;
+                    const syncMsg: ChangedForSale = {
+                        forSale: this.forSaleText.visible
+                    }
+                    sceneMessageBus.emit("changedForSale", syncMsg);
+                } else {
+                    //Marketplace.buyNFT
+                    
+                    //acquireNFT(currentUserAddress, ownerAddress, contractAddress, tokenId, new BigNumber(5), textComponent);
+                }
             }, {
                 button: ActionButton.POINTER
             },
@@ -54,5 +74,19 @@ export class LabledNFT {
         let textPosition = new Transform({ position: position.clone()});
         textPosition.position.y -= 0.7;
 
+        let forSalePosition = new Transform({position: position.clone()});
+        forSalePosition.position.y += 0.7;
+
+        //Create "For Sale" entity
+        const forSale = new Entity();
+        this.forSaleText = new TextShape("For sale");
+        this.forSaleText.fontSize = 3;
+        this.forSaleText.color = Color3.Green();
+        this.forSaleText.visible = false;
+        forSale.addComponent(this.forSaleText);
+        forSale.addComponent(forSalePosition);
+        engine.addEntity(forSale);
     }
+
+
 }

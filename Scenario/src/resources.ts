@@ -2,6 +2,7 @@ import { getUserAccount } from "@decentraland/EthereumController";
 import { BigNumber, RequestManager} from 'eth-connect'
 import { getProvider } from "@decentraland/web3-provider"
 
+export const marketplaceAddress = "0xd95b0D87b7e5531712702fAa7dD227ff29DFdCd8";
 export let currentUserAddress: string;
 executeTask(async () => {
     try {
@@ -34,4 +35,8 @@ export type TransactionResponse = {
 }
 export type NewOwnerText = {
     newOwner: string
+}
+
+export type ChangedForSale = {
+    forSale: boolean
 }

@@ -4,13 +4,13 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 contract Marketplace {
 
-    error NotApproved();
+    //error NotApproved();
 
     function buyNFT(address nftContract, uint256 tokenId) public payable {
         IERC721 nft = IERC721(nftContract);
 
         if (nft.getApproved(tokenId) != address(this)) {
-            revert NotApproved();
+            revert("Not approved");
         }
 
         address payable seller = payable(nft.ownerOf(tokenId));
@@ -24,7 +24,7 @@ contract Marketplace {
         IERC721 nft2 = IERC721(nftContract2);
 
         if (nft1.getApproved(tokenId1) != address(this) || nft2.getApproved(tokenId2) != address(this)) {
-            revert NotApproved();
+            revert("Not approved"); //NotApproved()
         }
 
         address firstExchanger = nft1.ownerOf(tokenId1);

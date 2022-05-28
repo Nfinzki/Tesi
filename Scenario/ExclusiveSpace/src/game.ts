@@ -32,10 +32,27 @@ facade.addComponent(new Transform({position: new Vector3(4, 0, 8), rotation: Qua
 facade.getComponent(Transform).rotate(Vector3.Up(), 180)
 engine.addEntity(facade)
 
-// Walls
+// Wall sx
 createWall(new Vector3(10, 14, 1), new Vector3(9, 0, 15));
+//Wall dx
 createWall(new Vector3(10, 14, 1), new Vector3(9, 0, 1));
+//Wall back
 createWall(new Vector3(1, 14, 15), new Vector3(14, 0, 8));
+
+//Create entity and assign shape
+const exclusiveImage = new Entity()
+exclusiveImage.addComponent(new PlaneShape())
+//Create material and configure its fields
+const myMaterial = new BasicMaterial()
+myMaterial.texture = new Texture("images/LouisArmstrong.jpg")
+//Assign the material to the entity
+exclusiveImage.addComponent(myMaterial)
+exclusiveImage.addComponent(new Transform({
+    position: new Vector3(13.4, 3, 8),
+    rotation:Quaternion.Euler(0, 90, 180),
+    scale: new Vector3(10, 5, 10)
+}))
+engine.addEntity(exclusiveImage)
 
 
 // Door

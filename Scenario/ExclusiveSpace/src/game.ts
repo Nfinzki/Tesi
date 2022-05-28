@@ -38,6 +38,8 @@ createWall(new Vector3(10, 14, 1), new Vector3(9, 0, 15));
 createWall(new Vector3(10, 14, 1), new Vector3(9, 0, 1));
 //Wall back
 createWall(new Vector3(1, 14, 15), new Vector3(14, 0, 8));
+//Roof
+createWall(new Vector3(10, 1.5, 15), new Vector3(9.5, 7.5, 8));
 
 //Create entity and assign shape
 const exclusiveImage = new Entity()

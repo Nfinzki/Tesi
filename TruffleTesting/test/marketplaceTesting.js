@@ -44,4 +44,16 @@ contract("Testing Marketplace", accounts => {
         assert.equal(firstOwner, accounts[1], "The NFT isn't owned by account1");
         assert.equal(secondOwner, accounts[2], "The NFT isn't owned by account2");
     });
+
+    it ("Should test the approving process", async () => {
+        const nftInstance = await MyNFT.new();
+        await nftInstance.mintNFT(accounts[1], "ipfs://QmSgNUUUGciW3y5RrzrH3FVvUN4PErd3VUYcVKEwmjW1xB");
+
+        const marketplaceInstance = await Marketplace.new();
+
+        await nftInstance.approve(marketplaceInstance.address, 1, {from: accounts[1], gasPrice: 5000000000, gas: 100000});
+        const approved = await nftInstance.getApproved(1);
+
+        assert.equal(approved, marketplaceInstance.address, "The marketplace isn't approved");
+    });
 });

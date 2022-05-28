@@ -1,7 +1,8 @@
+import { requirePayment } from "@decentraland/EthereumController";
 import { getProvider } from "@decentraland/web3-provider";
 import {RequestManager, BigNumber, ContractFactory, fromWei } from "eth-connect"
 import NFT_ABI from "src/contracts/NFT_ABI";
-import { ChangedForSale, currentUserAddress, sceneMessageBus } from "src/resources"
+import { ChangedForSale, currentUserAddress, marketplaceAddress, nullAddress, sceneMessageBus } from "src/resources"
 import { acquireNFT } from "src/transactions"
 
 export class LabledNFT {
@@ -30,14 +31,17 @@ export class LabledNFT {
             // const balanceWei = await requestManager.eth_getBalance(ownerAddress, "latest");
             // const balance = fromWei(balanceWei, "ether");
 
-            nftImage.addComponent(new OnPointerDown((e) => {
+            nftImage.addComponent(new OnPointerDown(async (e) => {
                 log("Dati: " + currentUserAddress + "\n" + ownerAddress)
                 
                 if (currentUserAddress.toLocaleLowerCase() === ownerAddress.toLocaleLowerCase()) {
                     if (!this.forSaleText.visible) {
                         //Approve Marketplace
+                        log(marketplaceAddress);
+                        log(await contract.approve(marketplaceAddress, tokenId, {from: currentUserAddress}));
                     } else {
-                        //Approve 0x00000000000
+                        //Revoke approval
+                        await contract.approve(nullAddress, tokenId, {from: currentUserAddress});
                     }
 
                     this.forSaleText.visible = !this.forSaleText.visible;
@@ -47,8 +51,8 @@ export class LabledNFT {
                     sceneMessageBus.emit("changedForSale", syncMsg);
                 } else {
                     //Marketplace.buyNFT
-                    
-                    //acquireNFT(currentUserAddress, ownerAddress, contractAddress, tokenId, new BigNumber(5), textComponent);
+                    log(await contract.getApproved(tokenId));
+                    // acquireNFT(currentUserAddress, ownerAddress, contractAddress, tokenId, new BigNumber(5), textComponent);
                 }
             }, {
                 button: ActionButton.POINTER

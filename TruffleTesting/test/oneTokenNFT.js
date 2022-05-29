@@ -16,4 +16,10 @@ contract("Testing OneTokenNFT", accounts => {
         
         await oneTokenNFTInstance.safeTransferFrom(accounts[0], accounts[1], 1);
     });
+
+    it ("Should test the mint", async () => {
+        const oneTokenNFTInstance = await OneTokenNFT.new();
+        await oneTokenNFTInstance.mintNFT(accounts[0], "ipfs://QmSgNUUUGciW3y5RrzrH3FVvUN4PErd3VUYcVKEwmjW1xB");
+        await oneTokenNFTInstance.mintNFT(accounts[0], "ipfs://QmSgNUUUGciW3y5RrzrH3FVvUN4PErd3VUYcVKEwmjW1xB");
+    });
 });

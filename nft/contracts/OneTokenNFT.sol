@@ -17,6 +17,9 @@ contract OneTokenNFT is ERC721URIStorage, Ownable {
         public onlyOwner
         returns (uint256)
     {
+        if (balanceOf(recipient) >= 1)
+            revert ("Already owns one NFT of that family");
+        
         _tokenIds.increment();
 
         uint256 newItemId = _tokenIds.current();

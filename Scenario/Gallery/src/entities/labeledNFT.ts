@@ -1,8 +1,9 @@
 import { requirePayment } from "@decentraland/EthereumController";
 import { getProvider } from "@decentraland/web3-provider";
-import {RequestManager, BigNumber, ContractFactory, fromWei } from "eth-connect"
+import {RequestManager, BigNumber, ContractFactory, fromWei, toWei } from "eth-connect"
+import Marketplace_ABI from "src/contracts/Marketplace_ABI";
 import NFT_ABI from "src/contracts/NFT_ABI";
-import { ChangedForSale, currentUserAddress, marketplaceAddress, nullAddress, sceneMessageBus } from "src/resources"
+import { ChangedForSale, currentUserAddress, marketplaceAddress, NewOwnerText, nullAddress, sceneMessageBus } from "src/resources"
 import { acquireNFT } from "src/transactions"
 
 export class LabledNFT {
@@ -16,6 +17,9 @@ export class LabledNFT {
             const factory = new ContractFactory(requestManager, NFT_ABI);
             const contract = (await factory.at(contractAddress)) as any
 
+            const marketplaceFactory = new ContractFactory(requestManager, Marketplace_ABI);
+            const marketplace = (await marketplaceFactory.at(marketplaceAddress)) as any
+
             let ownerAddress = await contract.ownerOf(tokenId);
             
             const nftOwner = new Entity();
@@ -26,18 +30,16 @@ export class LabledNFT {
             nftOwner.addComponent(textPosition)
             engine.addEntity(nftOwner);
 
-            
-
-            // const balanceWei = await requestManager.eth_getBalance(ownerAddress, "latest");
-            // const balance = fromWei(balanceWei, "ether");
+            const approvedAddress = await contract.getApproved(tokenId);
+            if (approvedAddress.toLocaleLowerCase() != nullAddress)
+                this.forSaleText.visible = true;
 
             nftImage.addComponent(new OnPointerDown(async (e) => {
                 log("Dati: " + currentUserAddress + "\n" + ownerAddress)
-                await requirePayment("0x30dce1ecc30ca8880eF9BBD2664bE7F2a41D0637", 0.00001, "ETH");
+
                 if (currentUserAddress.toLocaleLowerCase() === ownerAddress.toLocaleLowerCase()) {
                     if (!this.forSaleText.visible) {
                         //Approve Marketplace
-                        log(marketplaceAddress);
                         log(await contract.approve(marketplaceAddress, tokenId, {from: currentUserAddress}));
                     } else {
                         //Revoke approval
@@ -50,9 +52,22 @@ export class LabledNFT {
                     }
                     sceneMessageBus.emit("changedForSale", syncMsg);
                 } else {
-                    //Marketplace.buyNFT
-                    log(await contract.getApproved(tokenId));
-                    // acquireNFT(currentUserAddress, ownerAddress, contractAddress, tokenId, new BigNumber(5), textComponent);
+                    if (this.forSaleText.visible) {
+                        //Marketplace.buyNFT
+                        await marketplace.buyNFT(contractAddress, tokenId, {from: currentUserAddress, value: toWei("0.0001", "ether")})
+                        
+                        const response: NewOwnerText = {
+                            newOwner: currentUserAddress
+                        }
+                        sceneMessageBus.emit("updateOwnerText", response);
+                        
+                        this.forSaleText.visible = false;
+                        const syncMsg: ChangedForSale = {
+                            forSale: this.forSaleText.visible
+                        }
+                        sceneMessageBus.emit("changedForSale", syncMsg);
+                        // acquireNFT(currentUserAddress, ownerAddress, contractAddress, tokenId, new BigNumber(5), textComponent);
+                    }
                 }
             }, {
                 button: ActionButton.POINTER

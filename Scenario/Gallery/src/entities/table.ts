@@ -20,7 +20,7 @@ export function createTable() {
     table.addComponent(new GLTFShape("models/table.glb"));
 
     table.addComponent(new Transform({
-    position: new Vector3(8, 0, 10),
+    position: new Vector3(8, 0, 5),
     scale: new Vector3(0.3, 0.3, 0.3)
     }))
 

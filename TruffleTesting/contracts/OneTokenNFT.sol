@@ -14,7 +14,7 @@ contract OneTokenNFT is ERC721URIStorage, Ownable {
     constructor() ERC721("MyNFT", "NFT") {}
 
     function mintNFT(address recipient, string memory tokenURI)
-        public onlyOwner
+        public
         returns (uint256)
     {
         if (balanceOf(recipient) >= 1)

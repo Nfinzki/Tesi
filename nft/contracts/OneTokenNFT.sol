@@ -29,10 +29,24 @@ contract OneTokenNFT is ERC721URIStorage, Ownable {
         return newItemId;
     }
 
+    function transferFrom(address from, address to, uint256 tokenId) public override {
+        if (balanceOf(to) >= 1)
+            revert ("Already owns one NFT of that family");
+
+        super.transferFrom(from, to, tokenId);
+    }
+
     function safeTransferFrom(address from, address to, uint256 tokenId) public override {
         if (balanceOf(to) >= 1)
             revert ("Already owns one NFT of that family");
 
-        super.safeTransferFrom(from, to, tokenId, "");
+        super.safeTransferFrom(from, to, tokenId);
+    }
+
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public override {
+        if (balanceOf(to) >= 1)
+            revert ("Already owns one NFT of that family");
+
+        super.safeTransferFrom(from, to, tokenId, data);
     }
 }

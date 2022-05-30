@@ -30,6 +30,17 @@ contract OneTimeBuyNFT is ERC721URIStorage, Ownable {
         return newItemId;
     }
 
+    function transferFrom(address from, address to, uint256 tokenId) public override {
+        uint i;
+        for(i = 0; i < ownedNFT[to].length; i++) {
+            if (tokenId == ownedNFT[to][i])
+                revert ("Token already owned");
+        }
+
+        super.transferFrom(from, to, tokenId);
+        ownedNFT[to].push(tokenId);
+    }
+
     function safeTransferFrom(address from, address to, uint256 tokenId) public override {
         uint i;
         for(i = 0; i < ownedNFT[to].length; i++) {
@@ -37,7 +48,18 @@ contract OneTimeBuyNFT is ERC721URIStorage, Ownable {
                 revert ("Token already owned");
         }
 
-        super.safeTransferFrom(from, to, tokenId, "");
+        super.safeTransferFrom(from, to, tokenId);
+        ownedNFT[to].push(tokenId);
+    }
+
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public override {
+        uint i;
+        for(i = 0; i < ownedNFT[to].length; i++) {
+            if (tokenId == ownedNFT[to][i])
+                revert ("Token already owned");
+        }
+
+        super.safeTransferFrom(from, to, tokenId, data);
         ownedNFT[to].push(tokenId);
     }
 }

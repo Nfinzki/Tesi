@@ -31,7 +31,7 @@ export function createTable() {
     engine.addEntity(physicalTable);
     physicalTable.addComponent(box);
     physicalTable.addComponent(new Transform({
-    position: new Vector3(8, 0, 10),
+    position: new Vector3(8, 0, 5),
     scale: new Vector3(0.7, 0.9, 0.7)
     }));
 

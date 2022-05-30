@@ -2,6 +2,7 @@ import { getUserAccount } from "@decentraland/EthereumController";
 import { BigNumber, RequestManager} from 'eth-connect'
 import { getProvider } from "@decentraland/web3-provider"
 
+export const myNFTAddress = "0x6865582a1402F690EA25FDB5d8601bED0Cb0cA43";
 export const marketplaceAddress = "0xd95b0D87b7e5531712702fAa7dD227ff29DFdCd8";
 export const nullAddress = "0x0000000000000000000000000000000000000000";
 

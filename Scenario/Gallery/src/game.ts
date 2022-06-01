@@ -1,7 +1,7 @@
 import { createTable } from './entities/table';
 import { LabledNFT } from './entities/labeledNFT';
 import { createWall } from './entities/wall';
-import { ChangedForSale, ipfsMJ, ipfsSax, ipfsTrumpet, myNFTAddress, oneTimeBuyNFTAddress, oneTokenNFTAddress, sceneMessageBus } from './resources';
+import { ChangedExchange, ChangedForSale, ipfsMJ, ipfsSax, ipfsTrumpet, myNFTAddress, oneTimeBuyNFTAddress, oneTokenNFTAddress, sceneMessageBus } from './resources';
 import { SellNFT } from './entities/sellNFT';
 import { ExchangeNFT } from './entities/exchangeNFT';
 import { MintNFT } from './entities/mintNFT';
@@ -82,7 +82,8 @@ const exchangeNft1 = new ExchangeNFT(
     Quaternion.Euler(0, 0, 0),
     oneTimeBuyNFTAddress,
     3,
-    OneTimeBuyNFT_ABI
+    OneTimeBuyNFT_ABI,
+    0
 );
 
 const exchangeNft2 = new ExchangeNFT(
@@ -92,11 +93,20 @@ const exchangeNft2 = new ExchangeNFT(
     Quaternion.Euler(0, 0, 0),
     oneTokenNFTAddress,
     1,
-    OneTokenNFT_ABI
+    OneTokenNFT_ABI,
+    1
 );
 
 createButton(exchangeNft1, exchangeNft2);
 
 sceneMessageBus.on("changedForSale", (syncMsg: ChangedForSale) => {
     myNft.forSaleText.visible = syncMsg.forSale;
+})
+
+sceneMessageBus.on("changedExchange", (syncMsg: ChangedExchange) => {
+    if (syncMsg.num === 0) {
+        exchangeNft1.selectedText.visible = syncMsg.exchange;
+    } else {
+        exchangeNft2.selectedText.visible = syncMsg.exchange;
+    }
 })

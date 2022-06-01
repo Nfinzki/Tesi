@@ -1,7 +1,7 @@
 import { getProvider } from "@decentraland/web3-provider";
 import RequestManager, { ContractFactory } from "eth-connect";
 import NFT_ABI from "src/contracts/NFT_ABI";
-import { ChangedForSale, currentUserAddress, marketplaceAddress, NewOwnerText, nullAddress, sceneMessageBus } from "src/resources";
+import { ChangedExchange, ChangedForSale, currentUserAddress, marketplaceAddress, NewOwnerText, nullAddress, sceneMessageBus } from "src/resources";
 import { LabledNFT } from "./labeledNFT";
 
 export class ExchangeNFT extends LabledNFT {
@@ -9,7 +9,7 @@ export class ExchangeNFT extends LabledNFT {
     contractAddress: string;
     tokenId: number;
 
-    constructor(imagePath: string, position: Vector3, rotation: Quaternion, addressRotation: Quaternion, contractAddress: string, tokenId: number, abi: any) {
+    constructor(imagePath: string, position: Vector3, rotation: Quaternion, addressRotation: Quaternion, contractAddress: string, tokenId: number, abi: any, num: number) {
         super(imagePath, position, rotation);
 
         this.contractAddress = contractAddress;
@@ -62,10 +62,11 @@ export class ExchangeNFT extends LabledNFT {
                     }
 
                     this.selectedText.visible = !this.selectedText.visible;
-                    const syncMsg: ChangedForSale = {
-                        forSale: this.selectedText.visible
+                    const syncMsg: ChangedExchange = {
+                        exchange: this.selectedText.visible,
+                        num: num
                     }
-                    sceneMessageBus.emit("changedForSale", syncMsg);
+                    sceneMessageBus.emit("changedExchange", syncMsg);
                 }
             }, {
                 button: ActionButton.POINTER

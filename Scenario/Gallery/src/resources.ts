@@ -50,3 +50,8 @@ export type NewOwnerText = {
 export type ChangedForSale = {
     forSale: boolean
 }
+
+export type ChangedExchange = {
+    exchange: boolean,
+    num: number
+}

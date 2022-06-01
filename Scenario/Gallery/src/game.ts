@@ -1,12 +1,15 @@
 import { createTable } from './entities/table';
 import { LabledNFT } from './entities/labeledNFT';
 import { createWall } from './entities/wall';
-import { ChangedForSale, myNFTAddress, sceneMessageBus } from './resources';
+import { ChangedForSale, ipfsMJ, ipfsSax, ipfsTrumpet, myNFTAddress, oneTimeBuyNFTAddress, oneTokenNFTAddress, sceneMessageBus } from './resources';
 import { SellNFT } from './entities/sellNFT';
 import { ExchangeNFT } from './entities/exchangeNFT';
 import { MintNFT } from './entities/mintNFT';
 import { AddressButton } from './ui/addressButton';
 import { createButton } from './entities/button';
+import OneTimeBuyNFT_ABI from './contracts/OneTimeBuyNFT_ABI';
+import OneTokenNFT_ABI from './contracts/OneTokenNFT_ABI';
+import NFT_ABI from './contracts/NFT_ABI';
 
 createTable();
 
@@ -22,21 +25,33 @@ createWall(
 );
 
 const oneTokenNft = new MintNFT(
-    "images/NFT/BennyTheBull.jpg",
-    new Vector3(1.55, 2, 8),
+    "images/NFT/MJ.jpg",
+    new Vector3(1.55, 2, 7),
     Quaternion.Euler(0, -90, 180),
     Quaternion.Euler(0, -90, 0),
-    myNFTAddress,
-    "ipfs://QmSgNUUUGciW3y5RrzrH3FVvUN4PErd3VUYcVKEwmjW1xB"
+    oneTimeBuyNFTAddress,
+    ipfsMJ,
+    OneTimeBuyNFT_ABI
 );
 
 const oneTimeBuyNFT = new MintNFT(
     "images/NFT/trumpet.png",
-    new Vector3(1.55, 2, 11),
+    new Vector3(1.55, 2, 10),
     Quaternion.Euler(0, -90, 180),
     Quaternion.Euler(0, -90, 0),
-    myNFTAddress,
-    "ipfs://QmSgNUUUGciW3y5RrzrH3FVvUN4PErd3VUYcVKEwmjW1xB"
+    oneTokenNFTAddress,
+    ipfsTrumpet,
+    OneTokenNFT_ABI
+);
+
+const oneTimeBuyNFT2 = new MintNFT(
+    "images/NFT/Sax.jpg",
+    new Vector3(1.55, 2, 13),
+    Quaternion.Euler(0, -90, 180),
+    Quaternion.Euler(0, -90, 0),
+    oneTokenNFTAddress,
+    ipfsSax,
+    OneTokenNFT_ABI
 );
 
 
@@ -56,25 +71,28 @@ const myNft = new SellNFT(
     Quaternion.Euler(0, 0, 180),
     Quaternion.Euler(0, 0, 0),
     myNFTAddress,
-    1
+    1,
+    NFT_ABI
 );
 
 const exchangeNft1 = new ExchangeNFT(
-    "images/NFT/BennyTheBull.jpg",
-    new Vector3(10, 2, 14.45),
+    "images/NFT/MJ.jpg",
+    new Vector3(9, 2, 14.45),
     Quaternion.Euler(0, 0, 180),
     Quaternion.Euler(0, 0, 0),
-    myNFTAddress,
-    1
+    oneTimeBuyNFTAddress,
+    3,
+    OneTimeBuyNFT_ABI
 );
 
 const exchangeNft2 = new ExchangeNFT(
-    "images/NFT/BennyTheBull.jpg",
+    "images/NFT/trumpet.png",
     new Vector3(13, 2, 14.45),
     Quaternion.Euler(0, 0, 180),
     Quaternion.Euler(0, 0, 0),
-    myNFTAddress,
-    1
+    oneTokenNFTAddress,
+    1,
+    OneTokenNFT_ABI
 );
 
 createButton(exchangeNft1, exchangeNft2);

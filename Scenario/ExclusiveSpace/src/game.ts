@@ -9,7 +9,7 @@ import { createWall } from "./entities/wall"
 // Config
 let userAddress: string
 
-const contractAddress = "0x6865582a1402F690EA25FDB5d8601bED0Cb0cA43"
+const contractAddress = "0xbB59aC8819342d0aF2768715bF86365c95C703bf"
 
 // Sounds
 const openDoorSound = new Sound(new AudioClip("sounds/openDoor.mp3"), false)

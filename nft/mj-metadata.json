@@ -1,0 +1,20 @@
+{
+    "attributes": [
+      {
+        "trait_type": "Rarity",
+        "value": "GOAT"
+      },
+      {
+        "trait_type": "Team",
+        "value": "Chicago Bulls"
+      },
+      {
+          "trait_type": "Hair",
+          "value": "None"
+      },
+    ],
+    "description": "The greatest of all time",
+    "image": "ipfs://QmUsUHSnCB5ws8ohc35Z9vd3pan5wuRdbwAbH7EUrd9zgE",
+    "name": "Michael Jordan"
+  }
+  

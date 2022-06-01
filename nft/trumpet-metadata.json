@@ -1,0 +1,20 @@
+{
+    "attributes": [
+      {
+        "trait_type": "Rarity",
+        "value": "Common"
+      },
+      {
+        "trait_type": "Instrument",
+        "value": "Trumpet"
+      },
+      {
+          "trait_type": "Genre",
+          "value": "Jazz"
+      },
+    ],
+    "description": "A common trumpet",
+    "image": "ipfs://QmYfXzgSXtQPYSSgsrHukgunD5a8a4Ke6tw1KBB9vW68Wd",
+    "name": "Trumpet"
+  }
+  

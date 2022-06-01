@@ -1,0 +1,20 @@
+{
+    "attributes": [
+      {
+        "trait_type": "Rarity",
+        "value": "Common"
+      },
+      {
+        "trait_type": "Instrument",
+        "value": "Saxophone"
+      },
+      {
+          "trait_type": "Genre",
+          "value": "Jazz"
+      },
+    ],
+    "description": "A common saxophone",
+    "image": "ipfs://QmWs7wDfsvAMifa7wG1xiCVzuDBTmT1is2nXXv873T8uX2",
+    "name": "Saxophone"
+  }
+  

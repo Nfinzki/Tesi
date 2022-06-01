@@ -480,8 +480,8 @@
       ]
     },
     "C:\\Users\\franc\\Documents\\Università\\Tesi\\nft\\contracts\\Marketplace.sol": {
-      "lastModificationDate": 1652947294370,
-      "contentHash": "d253068e3c35defc3891d7c99d6f6e4c",
+      "lastModificationDate": 1652948639236,
+      "contentHash": "a3a542e86a5b5b5c8f1bfcb2d99f75a7",
       "sourceName": "contracts/Marketplace.sol",
       "solcConfig": {
         "version": "0.8.1",
@@ -514,6 +514,86 @@
       ],
       "artifacts": [
         "Marketplace"
+      ]
+    },
+    "C:\\Users\\franc\\Documents\\Università\\Tesi\\nft\\contracts\\OneTokenNFT.sol": {
+      "lastModificationDate": 1654106826700,
+      "contentHash": "917bf48d7d546b12f01dd13eb65d4fb7",
+      "sourceName": "contracts/OneTokenNFT.sol",
+      "solcConfig": {
+        "version": "0.8.1",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/utils/Counters.sol",
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "OneTokenNFT"
+      ]
+    },
+    "C:\\Users\\franc\\Documents\\Università\\Tesi\\nft\\contracts\\OneTimeBuyNFT.sol": {
+      "lastModificationDate": 1654106823373,
+      "contentHash": "98c8f5c41882be5772f1f41262afc8fb",
+      "sourceName": "contracts/OneTimeBuyNFT.sol",
+      "solcConfig": {
+        "version": "0.8.1",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/utils/Counters.sol",
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "OneTimeBuyNFT"
       ]
     }
   }

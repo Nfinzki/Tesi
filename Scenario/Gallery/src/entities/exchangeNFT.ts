@@ -9,7 +9,7 @@ export class ExchangeNFT extends LabledNFT {
     contractAddress: string;
     tokenId: number;
 
-    constructor(imagePath: string, position: Vector3, rotation: Quaternion, addressRotation: Quaternion, contractAddress: string, tokenId: number) {
+    constructor(imagePath: string, position: Vector3, rotation: Quaternion, addressRotation: Quaternion, contractAddress: string, tokenId: number, abi: any) {
         super(imagePath, position, rotation);
 
         this.contractAddress = contractAddress;
@@ -34,11 +34,8 @@ export class ExchangeNFT extends LabledNFT {
         executeTask(async () => {
             const provider = await getProvider();
             const requestManager = new RequestManager(provider)
-            const factory = new ContractFactory(requestManager, NFT_ABI);
+            const factory = new ContractFactory(requestManager, abi);
             const contract = (await factory.at(contractAddress)) as any
-
-            // const marketplaceFactory = new ContractFactory(requestManager, Marketplace_ABI);
-            // const marketplace = (await marketplaceFactory.at(marketplaceAddress)) as any
 
             let ownerAddress = await contract.ownerOf(tokenId);
             

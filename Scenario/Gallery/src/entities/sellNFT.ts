@@ -8,7 +8,7 @@ import { LabledNFT } from "./labeledNFT";
 export class SellNFT extends LabledNFT {
     forSaleText: TextShape;
 
-    constructor(imagePath: string, position: Vector3, rotation: Quaternion, addressRotation: Quaternion, contractAddress: string, tokenId: number) {
+    constructor(imagePath: string, position: Vector3, rotation: Quaternion, addressRotation: Quaternion, contractAddress: string, tokenId: number, abi: any) {
         super(imagePath, position, rotation);
 
         let textPosition = new Transform({ position: position.clone(), rotation: addressRotation});
@@ -30,7 +30,7 @@ export class SellNFT extends LabledNFT {
         executeTask(async () => {
             const provider = await getProvider();
             const requestManager = new RequestManager(provider)
-            const factory = new ContractFactory(requestManager, NFT_ABI);
+            const factory = new ContractFactory(requestManager, abi);
             const contract = (await factory.at(contractAddress)) as any
 
             const marketplaceFactory = new ContractFactory(requestManager, Marketplace_ABI);

@@ -1,4 +1,3 @@
-import { getUserAccount } from "@decentraland/EthereumController";
 import { getConnectedPlayers } from "@decentraland/Players";
 import { currentUserAddress } from "src/resources";
 import { CreateTransactionUI } from "src/ui/transactionUI";

@@ -1,7 +1,6 @@
 import { getProvider } from "@decentraland/web3-provider";
 import RequestManager, { ContractFactory } from "eth-connect";
-import NFT_ABI from "src/contracts/NFT_ABI";
-import { ChangedForSale, currentUserAddress, marketplaceAddress, NewOwnerText, nullAddress, sceneMessageBus } from "src/resources";
+import { currentUserAddress } from "src/resources";
 import { LabledNFT } from "./labeledNFT";
 
 export class MintNFT extends LabledNFT {

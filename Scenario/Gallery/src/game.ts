@@ -1,11 +1,9 @@
 import { createTable } from './entities/table';
-import { LabledNFT } from './entities/labeledNFT';
 import { createWall } from './entities/wall';
 import { ChangedExchange, ChangedForSale, ipfsMJ, ipfsSax, ipfsTrumpet, myNFTAddress, oneTimeBuyNFTAddress, oneTokenNFTAddress, sceneMessageBus } from './resources';
 import { SellNFT } from './entities/sellNFT';
 import { ExchangeNFT } from './entities/exchangeNFT';
 import { MintNFT } from './entities/mintNFT';
-import { AddressButton } from './ui/addressButton';
 import { createButton } from './entities/button';
 import OneTimeBuyNFT_ABI from './contracts/OneTimeBuyNFT_ABI';
 import OneTokenNFT_ABI from './contracts/OneTokenNFT_ABI';

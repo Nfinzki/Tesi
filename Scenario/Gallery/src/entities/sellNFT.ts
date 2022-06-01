@@ -1,7 +1,6 @@
 import { getProvider } from "@decentraland/web3-provider";
 import RequestManager, { ContractFactory, toWei } from "eth-connect";
 import Marketplace_ABI from "src/contracts/Marketplace_ABI";
-import NFT_ABI from "src/contracts/NFT_ABI";
 import { ChangedForSale, currentUserAddress, marketplaceAddress, NewOwnerText, nullAddress, sceneMessageBus } from "src/resources";
 import { LabledNFT } from "./labeledNFT";
 

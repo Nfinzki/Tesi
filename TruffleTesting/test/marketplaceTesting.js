@@ -8,7 +8,8 @@ contract("Testing Marketplace", accounts => {
         await nftInstance.mintNFT(accounts[0], "ipfs://QmSgNUUUGciW3y5RrzrH3FVvUN4PErd3VUYcVKEwmjW1xB");
 
         const marketplaceInstance = await Marketplace.new();
-        
+        const prevBalance = await web3.eth.getBalance(accounts[0]);
+
         await nftInstance.approve(marketplaceInstance.address, 1, {from: accounts[0]});
         const approved = await nftInstance.getApproved(1);
         assert.equal(approved, marketplaceInstance.address, "The token is not approved");
@@ -19,7 +20,8 @@ contract("Testing Marketplace", accounts => {
         
         //Get balance
         const balance = await web3.eth.getBalance(accounts[0]);
-        assert.equal(balance - 99987869202869932519, web3.utils.toWei("1"), "The account didn't receive 1 Ether");
+        const gain = (balance - prevBalance) <= web3.utils.toWei("1");
+        assert.equal(gain, true, "The account didn't receive 1 Ether");
 
     });
 

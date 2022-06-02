@@ -1,4 +1,5 @@
 const OneTimeBuyNFT = artifacts.require("OneTimeBuyNFT")
+const truffleAssert = require('truffle-assertions');
 
 contract("Testing OneTimeBuyNFT", accounts => {
 
@@ -10,7 +11,10 @@ contract("Testing OneTimeBuyNFT", accounts => {
         const owner = await nftInstance.ownerOf(1);
         assert.equal(owner, accounts[1], "The NFT isn't owned by account1");
         
-        await nftInstance.safeTransferFrom(accounts[1], accounts[0], 1, {from: accounts[0]});
+        await truffleAssert.reverts(
+            nftInstance.safeTransferFrom(accounts[1], accounts[0], 1, {from: accounts[0]}),
+            "Token already owned"
+        );
     });
 
     // it ("Should test the safeTransferFrom with data", async () => {
@@ -32,6 +36,9 @@ contract("Testing OneTimeBuyNFT", accounts => {
         const owner = await nftInstance.ownerOf(1);
         assert.equal(owner, accounts[1], "The NFT isn't owned by account1");
         
-        await nftInstance.transferFrom(accounts[1], accounts[0], 1, {from: accounts[0]});
+        await truffleAssert.reverts(
+            nftInstance.transferFrom(accounts[1], accounts[0], 1, {from: accounts[0]}),
+            "Token already owned"
+        );
     });
 });

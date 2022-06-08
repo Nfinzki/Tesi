@@ -1,9 +1,9 @@
 import { getProvider } from "@decentraland/web3-provider";
 import RequestManager, { ContractFactory } from "eth-connect";
 import { currentUserAddress } from "src/resources";
-import { LabledNFT } from "./labeledNFT";
+import { NFTComponent } from "./NFTComponent";
 
-export class MintNFT extends LabledNFT {
+export class MintNFT extends NFTComponent {
     constructor(imagePath: string, position: Vector3, rotation: Quaternion, addressRotation: Quaternion, contractAddress: string, tokenURI: string, abi: any) {
         super(imagePath, position, rotation);
 

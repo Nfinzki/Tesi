@@ -1,4 +1,4 @@
-export class LabledNFT {
+export class NFTComponent {
     protected nftImage;
 
     constructor(imagePath: string, position: Vector3, rotation: Quaternion) {

@@ -1,9 +1,9 @@
 import { getProvider } from "@decentraland/web3-provider";
 import RequestManager, { ContractFactory } from "eth-connect";
 import { ChangedExchange, currentUserAddress, marketplaceAddress, nullAddress, sceneMessageBus } from "src/resources";
-import { LabledNFT } from "./labeledNFT";
+import { NFTComponent } from "./NFTComponent";
 
-export class ExchangeNFT extends LabledNFT {
+export class ExchangeNFT extends NFTComponent {
     selectedText: TextShape;
     contractAddress: string;
     tokenId: number;

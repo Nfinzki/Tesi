@@ -1,10 +1,10 @@
 import { getProvider } from "@decentraland/web3-provider";
-import RequestManager, { ContractFactory, toWei } from "eth-connect";
+import { RequestManager, ContractFactory, toWei } from "eth-connect";
 import Marketplace_ABI from "src/contracts/Marketplace_ABI";
 import { ChangedForSale, currentUserAddress, marketplaceAddress, NewOwnerText, nullAddress, sceneMessageBus } from "src/resources";
-import { LabledNFT } from "./labeledNFT";
+import { NFTComponent } from "./NFTComponent";
 
-export class SellNFT extends LabledNFT {
+export class SellNFT extends NFTComponent {
     forSaleText: TextShape;
 
     constructor(imagePath: string, position: Vector3, rotation: Quaternion, addressRotation: Quaternion, contractAddress: string, tokenId: number, abi: any) {

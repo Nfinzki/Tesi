@@ -98,7 +98,7 @@ const exchangeNft1 = new ExchangeNFT(
     Quaternion.Euler(0, 0, 180),
     Quaternion.Euler(0, 0, 0),
     oneTimeBuyNFTAddress,
-    3,
+    4,
     OneTimeBuyNFT_ABI,
     0
 );
@@ -109,7 +109,7 @@ const exchangeNft2 = new ExchangeNFT(
     Quaternion.Euler(0, 0, 180),
     Quaternion.Euler(0, 0, 0),
     oneTokenNFTAddress,
-    1,
+    2,
     OneTokenNFT_ABI,
     1
 );
@@ -126,4 +126,9 @@ sceneMessageBus.on("changedExchange", (syncMsg: ChangedExchange) => {
     } else {
         exchangeNft2.selectedText.visible = syncMsg.exchange;
     }
+})
+
+sceneMessageBus.on("nftExchanged", () => {
+    exchangeNft1.updateOwner();
+    exchangeNft2.updateOwner();
 })

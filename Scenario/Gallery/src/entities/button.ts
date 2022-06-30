@@ -1,7 +1,7 @@
 import { getProvider } from "@decentraland/web3-provider";
 import RequestManager, { ContractFactory } from "eth-connect";
 import Marketplace_ABI from "src/contracts/Marketplace_ABI";
-import { currentUserAddress, marketplaceAddress } from "src/resources";
+import { currentUserAddress, marketplaceAddress, sceneMessageBus } from "src/resources";
 import { ExchangeNFT } from "./exchangeNFT";
 
 export function createButton(nft1: ExchangeNFT, nft2: ExchangeNFT) {
@@ -37,6 +37,8 @@ export function createButton(nft1: ExchangeNFT, nft2: ExchangeNFT) {
                         nft2.getTokenId(),
                         {from: currentUserAddress})
                     )
+
+                    sceneMessageBus.emit("nftExchanged", {});
                 }
             }, {
                 button: ActionButton.POINTER

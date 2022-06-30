@@ -7,12 +7,16 @@ export class ExchangeNFT extends NFTComponent {
     selectedText: TextShape;
     contractAddress: string;
     tokenId: number;
+    abi: any;
+    ownerText: TextShape;
 
     constructor(imagePath: string, position: Vector3, rotation: Quaternion, addressRotation: Quaternion, contractAddress: string, tokenId: number, abi: any, num: number) {
         super(imagePath, position, rotation);
 
         this.contractAddress = contractAddress;
         this.tokenId = tokenId;
+        this.abi = abi;
+        this.ownerText = new TextShape();
 
         let textPosition = new Transform({ position: position.clone(), rotation: addressRotation});
         textPosition.position.y -= 0.7;
@@ -39,10 +43,10 @@ export class ExchangeNFT extends NFTComponent {
             let ownerAddress = await contract.ownerOf(tokenId);
             
             const nftOwner = new Entity();
-            const textComponent = new TextShape(ownerAddress);
-            textComponent.fontSize = 1;
-            textComponent.color = Color3.Black();
-            nftOwner.addComponent(textComponent)
+            this.ownerText = new TextShape(ownerAddress);
+            this.ownerText.fontSize = 1;
+            this.ownerText.color = Color3.Black();
+            nftOwner.addComponent(this.ownerText)
             nftOwner.addComponent(textPosition)
             engine.addEntity(nftOwner);
 
@@ -84,5 +88,18 @@ export class ExchangeNFT extends NFTComponent {
     
     getTokenId(): number {
         return this.tokenId;
+    }
+
+    updateOwner(): void {
+        executeTask(async () => {
+            const provider = await getProvider();
+            const requestManager = new RequestManager(provider)
+            const factory = new ContractFactory(requestManager, this.abi);
+            const contract = (await factory.at(this.contractAddress)) as any
+
+            let ownerAddress = await contract.ownerOf(this.tokenId);
+            
+            this.ownerText.value = ownerAddress;
+        })
     }
 }

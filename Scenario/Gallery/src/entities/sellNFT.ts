@@ -79,7 +79,7 @@ export class SellNFT extends NFTComponent {
                             forSale: this.forSaleText.visible
                         }
                         sceneMessageBus.emit("changedForSale", syncMsg);
-                        // acquireNFT(currentUserAddress, ownerAddress, contractAddress, tokenId, new BigNumber(5), textComponent);
+                        // acquireNFT(currentUserAddress, ownerAddress, contractAddress, tokenId, textComponent);
                     }
                 }
             }, {

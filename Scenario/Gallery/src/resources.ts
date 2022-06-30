@@ -33,7 +33,6 @@ export type TransactionRequest = {
     senderAddress: string,
     receiverAddress: string,
     contractAddress: string,
-    balance: BigNumber
     tokenId: number
 }
 export type TransactionResponse = {

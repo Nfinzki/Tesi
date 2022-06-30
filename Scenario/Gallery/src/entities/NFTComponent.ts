@@ -5,12 +5,15 @@ export class NFTComponent {
         //Create entity and assign shape
         this.nftImage = new Entity()
         this.nftImage.addComponent(new PlaneShape())
+
         //Create material and configure its fields
         const myMaterial = new BasicMaterial()
         myMaterial.texture = new Texture(imagePath)
+
         //Assign the material to the entity
         this.nftImage.addComponent(myMaterial)
 
+        //Create the Transform component
         let transform: Transform;
         if (typeof scale !== 'undefined') {
             transform = new Transform({
@@ -25,7 +28,6 @@ export class NFTComponent {
             })
         }
         
-
         this.nftImage.addComponent(transform)
         
         engine.addEntity(this.nftImage)

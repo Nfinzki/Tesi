@@ -78,7 +78,7 @@ export class ExchangeNFT extends NFTComponent {
         })
     }
 
-    getSelected() : boolean {
+    isSelected() : boolean {
         return this.selectedText.visible;
     }
 
@@ -90,16 +90,7 @@ export class ExchangeNFT extends NFTComponent {
         return this.tokenId;
     }
 
-    updateOwner(): void {
-        executeTask(async () => {
-            const provider = await getProvider();
-            const requestManager = new RequestManager(provider)
-            const factory = new ContractFactory(requestManager, this.abi);
-            const contract = (await factory.at(this.contractAddress)) as any
-
-            let ownerAddress = await contract.ownerOf(this.tokenId);
-            
-            this.ownerText.value = ownerAddress;
-        })
+    updateOwner(newOwner: string): void {
+        this.ownerText.value = newOwner;
     }
 }

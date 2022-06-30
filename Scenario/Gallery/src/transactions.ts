@@ -6,7 +6,7 @@ import { getProvider } from "@decentraland/web3-provider";
 
 let addressOwner: TextShape
 let contractAddr: string
-export function acquireNFT(from: string, to: string, contractAddress: string, tokenId: number, balance: BigNumber, owner: TextShape) {
+export function acquireNFT(from: string, to: string, contractAddress: string, tokenId: number, owner: TextShape) {
     addressOwner = owner;
     contractAddr = contractAddress;
     
@@ -16,7 +16,6 @@ export function acquireNFT(from: string, to: string, contractAddress: string, to
         senderAddress: from,
         receiverAddress: to,
         contractAddress: contractAddress,
-        balance: balance,
         tokenId: tokenId
     }
 

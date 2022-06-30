@@ -129,6 +129,7 @@ sceneMessageBus.on("changedExchange", (syncMsg: ChangedExchange) => {
 })
 
 sceneMessageBus.on("nftExchanged", () => {
-    exchangeNft1.updateOwner();
-    exchangeNft2.updateOwner();
+    const newOwner2 = exchangeNft1.ownerText.value;
+    exchangeNft1.updateOwner(exchangeNft2.ownerText.value);
+    exchangeNft2.updateOwner(newOwner2);
 })

@@ -8,6 +8,7 @@ import { createButton } from './entities/button';
 import OneTimeBuyNFT_ABI from './contracts/OneTimeBuyNFT_ABI';
 import OneTokenNFT_ABI from './contracts/OneTokenNFT_ABI';
 import NFT_ABI from './contracts/NFT_ABI';
+import { NFTComponent } from './entities/NFTComponent';
 
 createTable();
 
@@ -17,7 +18,7 @@ createWall(
     new Vector3(1, 0, 10),
     "Mint NFTs",
     new Transform({
-        position: new Vector3(1.55, 4, 9.5),
+        position: new Vector3(1.55, 4.5, 9.5),
         rotation: Quaternion.Euler(0, -90, 0)
     })
 );
@@ -32,9 +33,27 @@ const oneTokenNft = new MintNFT(
     OneTimeBuyNFT_ABI
 );
 
+const concertImage = new NFTComponent(
+    "images/louisArmstrongConcert.jpg",
+    new Vector3(1.6, 3.3, 11.5),
+    Quaternion.Euler(0, -90, 180),
+    new Vector3(3, 1.5, 0)
+);
+
+const concertTextEntity = new Entity();
+const concertText = new TextShape("Jazz Concert\nTickets for sale!");
+concertText.fontSize = 3.5;
+concertText.color = Color3.Black();
+concertTextEntity.addComponent(concertText);
+concertTextEntity.addComponent(new Transform({
+    position: new Vector3(1.6, 2.2, 11.5),
+    rotation: Quaternion.Euler(0, -90, 0)
+}));
+engine.addEntity(concertTextEntity);
+
 const oneTimeBuyNFT = new MintNFT(
     "images/NFT/trumpet.png",
-    new Vector3(1.55, 2, 10),
+    new Vector3(1.55, 1.4, 10),
     Quaternion.Euler(0, -90, 180),
     Quaternion.Euler(0, -90, 0),
     oneTokenNFTAddress,
@@ -44,7 +63,7 @@ const oneTimeBuyNFT = new MintNFT(
 
 const oneTimeBuyNFT2 = new MintNFT(
     "images/NFT/Sax.jpg",
-    new Vector3(1.55, 2, 13),
+    new Vector3(1.55, 1.4, 13),
     Quaternion.Euler(0, -90, 180),
     Quaternion.Euler(0, -90, 0),
     oneTokenNFTAddress,

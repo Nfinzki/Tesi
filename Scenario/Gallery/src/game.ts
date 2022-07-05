@@ -62,7 +62,7 @@ const oneTimeBuyNFT = new MintNFT(
 );
 
 const oneTimeBuyNFT2 = new MintNFT(
-    "images/NFT/Sax.jpg",
+    "images/NFT/Sax.png",
     new Vector3(1.55, 1.4, 13),
     Quaternion.Euler(0, -90, 180),
     Quaternion.Euler(0, -90, 0),

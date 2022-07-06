@@ -28,7 +28,7 @@ export class MintNFT extends NFTComponent {
             engine.addEntity(contractAddressEntity);
 
             this.nftImage.addComponent(new OnPointerDown(async (e) => {
-                contract.mintNFT(currentUserAddress, tokenURI, {from: currentUserAddress});
+                log("mint Txn", contract.mintNFT(currentUserAddress, tokenURI, {from: currentUserAddress}));
             }, {
                 button: ActionButton.POINTER
             },

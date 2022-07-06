@@ -53,7 +53,7 @@ export class SellNFT extends NFTComponent {
                 if (currentUserAddress.toLocaleLowerCase() === ownerAddress.toLocaleLowerCase()) {
                     if (!this.forSaleText.visible) {
                         //Approve Marketplace
-                        log(await contract.approve(marketplaceAddress, tokenId, {from: currentUserAddress}));
+                        log("approve sell txn: ", await contract.approve(marketplaceAddress, tokenId, {from: currentUserAddress}));
                     } else {
                         //Revoke approval
                         await contract.approve(nullAddress, tokenId, {from: currentUserAddress});
@@ -67,7 +67,7 @@ export class SellNFT extends NFTComponent {
                 } else {
                     if (this.forSaleText.visible) {
                         //Marketplace.buyNFT
-                        await marketplace.buyNFT(contractAddress, tokenId, {from: currentUserAddress, value: toWei("0.5", "ether")})
+                        log("buyNFT txn: ", await marketplace.buyNFT(contractAddress, tokenId, {from: currentUserAddress, value: toWei("0.5", "ether")}));
                         
                         const response: NewOwnerText = {
                             newOwner: currentUserAddress

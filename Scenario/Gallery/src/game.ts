@@ -132,4 +132,7 @@ sceneMessageBus.on("nftExchanged", () => {
     const newOwner2 = exchangeNft1.ownerText.value;
     exchangeNft1.updateOwner(exchangeNft2.ownerText.value);
     exchangeNft2.updateOwner(newOwner2);
+
+    exchangeNft1.selectedText.visible = false;
+    exchangeNft2.selectedText.visible = false;
 })

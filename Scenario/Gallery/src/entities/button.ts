@@ -30,7 +30,7 @@ export function createButton(nft1: ExchangeNFT, nft2: ExchangeNFT) {
                 button.getComponent(AudioSource).playOnce();
     
                 if (nft1.isSelected() && nft2.isSelected()) {
-                    log(await marketplace.exchangeNFT(
+                    log("exchange Txn", await marketplace.exchangeNFT(
                         nft1.getContractAddress(),
                         nft1.getTokenId(),
                         nft2.getContractAddress(),

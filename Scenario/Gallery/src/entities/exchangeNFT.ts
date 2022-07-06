@@ -58,7 +58,7 @@ export class ExchangeNFT extends NFTComponent {
                 if (currentUserAddress.toLocaleLowerCase() === ownerAddress.toLocaleLowerCase()) {
                     if (!this.selectedText.visible) {
                         //Approve Marketplace
-                        log(await contract.approve(marketplaceAddress, tokenId, {from: currentUserAddress}));
+                        log("approve for exchange txn: ", await contract.approve(marketplaceAddress, tokenId, {from: currentUserAddress}));
                     } else {
                         //Revoke approval
                         await contract.approve(nullAddress, tokenId, {from: currentUserAddress});

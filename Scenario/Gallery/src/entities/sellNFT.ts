@@ -6,7 +6,7 @@ import { NFTComponent } from "./NFTComponent";
 
 export class SellNFT extends NFTComponent {
     forSaleText: TextShape;
-
+    ownerText: TextShape;
     constructor(imagePath: string, position: Vector3, rotation: Quaternion, addressRotation: Quaternion, contractAddress: string, tokenId: number, abi: any) {
         super(imagePath, position, rotation);
 
@@ -44,6 +44,7 @@ export class SellNFT extends NFTComponent {
             nftOwner.addComponent(textComponent)
             nftOwner.addComponent(textPosition)
             engine.addEntity(nftOwner);
+            this.ownerText= textComponent;
 
             const approvedAddress = await contract.getApproved(tokenId);
             if (approvedAddress.toLocaleLowerCase() != nullAddress)

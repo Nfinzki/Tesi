@@ -1,6 +1,6 @@
 import { createTable } from './entities/table';
 import { createWall } from './entities/wall';
-import { ChangedExchange, ChangedForSale, ipfsMJ, ipfsSax, ipfsTrumpet, myNFTAddress, oneTimeBuyNFTAddress, oneTokenNFTAddress, sceneMessageBus } from './resources';
+import { ChangedExchange, ChangedForSale, ipfsMJ, ipfsSax, ipfsTrumpet, myNFTAddress, NewOwnerText, oneTimeBuyNFTAddress, oneTokenNFTAddress, sceneMessageBus } from './resources';
 import { SellNFT } from './entities/sellNFT';
 import { ExchangeNFT } from './entities/exchangeNFT';
 import { MintNFT } from './entities/mintNFT';
@@ -98,7 +98,7 @@ const exchangeNft1 = new ExchangeNFT(
     Quaternion.Euler(0, 0, 180),
     Quaternion.Euler(0, 0, 0),
     oneTimeBuyNFTAddress,
-    4,
+    7,
     OneTimeBuyNFT_ABI,
     0
 );
@@ -109,7 +109,7 @@ const exchangeNft2 = new ExchangeNFT(
     Quaternion.Euler(0, 0, 180),
     Quaternion.Euler(0, 0, 0),
     oneTokenNFTAddress,
-    2,
+    4,
     OneTokenNFT_ABI,
     1
 );
@@ -118,6 +118,10 @@ createButton(exchangeNft1, exchangeNft2);
 
 sceneMessageBus.on("changedForSale", (syncMsg: ChangedForSale) => {
     myNft.forSaleText.visible = syncMsg.forSale;
+})
+
+sceneMessageBus.on("updateOwnerText", (message: NewOwnerText) => {
+    myNft.ownerText.value = message.newOwner;
 })
 
 sceneMessageBus.on("changedExchange", (syncMsg: ChangedExchange) => {
